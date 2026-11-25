@@ -5,23 +5,43 @@ import ecommerce.modelo.produto.Produto;
 /** Item de um carrinho/pedido: produto + quantidade (+ preço no momento da compra). */
 public class ItemPedido {
 
-    private Produto produto;
+    private final Produto produto;
     private int quantidade;
-    private double precoUnitario;
+    private final double precoUnitario;
 
     public ItemPedido(Produto produto, int quantidade) {
-        // TODO: copiar o preço atual do produto para precoUnitario
+        this.produto = produto;
+        this.quantidade = quantidade;
+        precoUnitario = produto.getPreco();
     }
 
-    public Produto getProduto() { throw new UnsupportedOperationException("TODO"); }
-    public int getQuantidade() { throw new UnsupportedOperationException("TODO"); }
+    public Produto getProduto() { 
+        return produto;
+    }
+    public int getQuantidade() {
+        return quantidade;
+    }
     /** @throws IllegalArgumentException se quantidade menor que 1. */
-    public void setQuantidade(int quantidade) { throw new UnsupportedOperationException("TODO"); }
-    public double getPrecoUnitario() { throw new UnsupportedOperationException("TODO"); }
+    public void setQuantidade(int quantidade) {
+        if(quantidade < 1)
+            throw new IllegalArgumentException("Quantidade vazia não permitida");
+        this.quantidade = quantidade;
+    }
+    public double getPrecoUnitario() {
+        return precoUnitario;
+    } 
 
     /** @return precoUnitario * quantidade. */
-    public double calcularSubtotal() { throw new UnsupportedOperationException("TODO"); }
+    public double calcularSubtotal() { 
+        return precoUnitario * quantidade;
+    }
 
     /** @return frete variável deste item (delega ao produto: POLIMORFISMO). */
-    public double calcularFreteVariavel() { throw new UnsupportedOperationException("TODO"); }
+    public double calcularFreteVariavel() { 
+        return produto.calcularFreteVariavel(quantidade);
+    }
+    @Override 
+    public String toString(){
+        return produto.toString() + "Quantidade: " + quantidade;
+    }
 }

@@ -9,5 +9,9 @@ public enum StatusPedido {
     CANCELADO;
 
     /** @return true se um pedido neste status ainda pode ser cancelado (definir a regra). */
-    public boolean permiteCancelamento() { throw new UnsupportedOperationException("TODO"); }
+    public boolean permiteCancelamento() {
+        if (this == AGUARDANDO_PAGAMENTO || this == PAGO)
+            return true;
+        return false;
+    }
 }
