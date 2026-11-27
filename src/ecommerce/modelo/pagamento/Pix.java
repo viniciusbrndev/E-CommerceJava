@@ -2,9 +2,19 @@ package ecommerce.modelo.pagamento;
 
 /** Pix: 5% de desconto sobre o total do pedido. */
 public class Pix extends FormaPagamento {
-    @Override public double calcularTotal(double subtotal, double frete) { throw new UnsupportedOperationException("TODO"); }
-    @Override public boolean pagamentoImediato() { throw new UnsupportedOperationException("TODO"); }
-    @Override public String getDescricao() { throw new UnsupportedOperationException("TODO"); }
-    @Override public String getTipo() { throw new UnsupportedOperationException("TODO"); }
-    @Override public String parametrosParaTexto() { throw new UnsupportedOperationException("TODO"); }
+    @Override public double calcularTotal(double subtotal, double frete) { 
+        return (subtotal + frete)*0.95;
+    }
+    @Override public boolean pagamentoImediato() { 
+        return true;
+    }
+    @Override public String getDescricao() {
+        return "Pagamento por Pix";
+    }
+    @Override public String getTipo() {
+        return "PIX";
+    }
+    @Override public String parametrosParaTexto() {
+        return "";
+    }
 }
